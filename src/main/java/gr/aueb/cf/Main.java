@@ -1,10 +1,10 @@
 package gr.aueb.cf;
 
+import gr.aueb.cf.model.Course;
 import gr.aueb.cf.model.Teacher;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 /**
  * Hello world!
@@ -19,12 +19,34 @@ public class Main {
 
         try {
             tx.begin();
+            //Select all teachers
+            String query = "SELECT t FROM Teacher t ";
+            TypedQuery<Teacher> typedQuery =
+                    em.createQuery(query, Teacher.class);
+            List<Teacher> teachers = typedQuery.getResultList();
+            teachers.forEach(System.out::println);
 
-            Teacher alice = new Teacher("Alice", "Smith");
-            em.persist(alice);
+            //Select all courses
+            String query2 = "SELECT c FROM Course c ";
+            List<Course> courses =
+                    em.createQuery(query2, Course.class).getResultList();
+            courses.forEach(System.out::println);
+
+
+
 
 
             tx.commit();
+
+//            Teacher alice = new Teacher("Alice", "Smith");
+//           em.persist(alice);
+
+//            Teacher alice  = em.find(Teacher.class, 1);
+//            Course java = new Course("Java");
+//            alice.addCourse(java);alice.setLastname("Wonderland");
+//
+//           em.persist(java);
+
         }catch (RuntimeException e){
             if (tx.isActive()) tx.rollback();
             throw e;

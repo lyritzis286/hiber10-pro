@@ -28,7 +28,7 @@ public class Teacher {
     private String lastname;
 
 
-    public Teacher(String lastname, String firstname) {
+    public Teacher(String firstname, String lastname) {
         this.lastname = lastname;
         this.firstname = firstname;
     }
