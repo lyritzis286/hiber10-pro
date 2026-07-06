@@ -20,17 +20,24 @@ public class Main {
         try {
             tx.begin();
             //Select all teachers
-            String query = "SELECT t FROM Teacher t ";
-            TypedQuery<Teacher> typedQuery =
-                    em.createQuery(query, Teacher.class);
-            List<Teacher> teachers = typedQuery.getResultList();
-            teachers.forEach(System.out::println);
+//            String query = "SELECT t FROM Teacher t ";
+//            TypedQuery<Teacher> typedQuery =
+//                    em.createQuery(query, Teacher.class);
+//            List<Teacher> teachers = typedQuery.getResultList();
+//            teachers.forEach(System.out::println);
+//
+//            //Select all courses
+//            String query2 = "SELECT c FROM Course c ";
+//            List<Course> courses =
+//                    em.createQuery(query2, Course.class).getResultList();
+//            courses.forEach(System.out::println);
 
-            //Select all courses
-            String query2 = "SELECT c FROM Course c ";
-            List<Course> courses =
-                    em.createQuery(query2, Course.class).getResultList();
-            courses.forEach(System.out::println);
+            //Select all courses of a teacher
+            String query3 = "SELECT c FROM Course c WHERE c.teacher" +
+                    ".lastname = 'Καπέτης'";
+            List<Course> kapetisCourses =
+                    em.createQuery(query3, Course.class).getResultList();
+            kapetisCourses.forEach(System.out::println);
 
 
 
